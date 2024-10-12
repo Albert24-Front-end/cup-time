@@ -5,12 +5,18 @@ import "normalize.css";
 import './index.css'
 import { BrowserRouter } from 'react-router-dom';
 import { ProductProvider } from './context/ProductContext.jsx';
+import { CartProvider } from './context/CartContext.jsx';
+import { OrderProvider } from './context/OrderContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <ProductProvider>
-        <App />
+        <CartProvider>
+          <OrderProvider>
+            <App />
+          </OrderProvider>
+        </CartProvider>
       </ProductProvider>
     </BrowserRouter>
   </StrictMode>,

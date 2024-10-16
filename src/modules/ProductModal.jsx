@@ -4,17 +4,6 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import style from "./ProductModal.module.css";
 
-// const customStyles = {
-//     content: {
-//         top: "50%",
-//         left: "50%",
-//         right: "auto",
-//         bottom: "auto",
-//         marginRight: "-50%",
-//         transform: "translate(-50%, -50%)",
-//     },
-// };
-
 Modal.setAppElement("#root");
 
 export const ProductModal = ({ isOpen, onRequestClose, data }) => {
@@ -24,6 +13,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
   if (!data) {
     return null;
   }
+
   const handleDecrease = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
@@ -32,10 +22,12 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
   const handleIncrease = () => {
     setQuantity(quantity + 1);
   };
+
   const handleAddtoCart = () => {
     addToCart(data, quantity);
     onRequestClose();
   };
+
   return (
     <Modal
       isOpen={isOpen}
@@ -43,13 +35,9 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
       // style={customStyles}
       className={style.modal}
       overlayClassName={style.overlay}
-      contentLabel={data.title}
-    >
-      <img
-        src={`${API_URL}${data.img}`}
-        alt={data.title}
-        className={style.image}
-      />
+      contentLabel={data.title}>
+      <img className={style.image} src={`${API_URL}${data.img}`} alt={data.title} />
+
       <div className={style.content}>
         <div className={style.header}>
           <h2 className={style.title}>
@@ -57,6 +45,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
           </h2>
           <p className={style.price}>{data.price}&nbsp;₽</p>
         </div>
+
         <ul className={style.list}>
           {Object.entries(data.additional).map(([key, value]) => (
             <li key={key} className={style.item}>
@@ -65,6 +54,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
             </li>
           ))}
         </ul>
+
         <div className={style.footer}>
         <div className={style.count}>
             <button onClick={handleDecrease} className={style.btn}>
@@ -73,8 +63,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
                 height="36"
                 viewBox="0 0 36 36"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+                xmlns="http://www.w3.org/2000/svg">
                 <rect
                 x="0.5"
                 y="0.5"
@@ -90,7 +79,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
             type="number"
             value={quantity}
             readOnly
-            className={style.nimber}
+            className={style.number}
             />
             <button onClick={handleIncrease} className={style.btn}>
             <svg
@@ -98,8 +87,7 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
                 height="36"
                 viewBox="0 0 36 36"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+                xmlns="http://www.w3.org/2000/svg">
                 <rect
                 x="0.5"
                 y="0.5"
@@ -120,19 +108,20 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
             </svg>
             </button>
         </div>
-        <button onClick={handleAddtoCart} className={style.btnAddCart}>Добавить</button>
+
+        <button onClick={handleAddtoCart} className={style.btnAddCart}>
+          Добавить
+          </button>
       </div>
       </div>
-    
-     
+  
       <button onClick={onRequestClose} className={style.btnCloseCard}>
         <svg
           width="20"
           height="20"
           viewBox="0 0 20 20"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <rect
             x="5.71228"
             y="14.1975"
@@ -154,3 +143,14 @@ export const ProductModal = ({ isOpen, onRequestClose, data }) => {
     </Modal>
   );
 };
+
+// const customStyles = {
+//     content: {
+//         top: "50%",
+//         left: "50%",
+//         right: "auto",
+//         bottom: "auto",
+//         marginRight: "-50%",
+//         transform: "translate(-50%, -50%)",
+//     },
+// };
